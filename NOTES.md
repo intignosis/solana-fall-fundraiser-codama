@@ -61,5 +61,11 @@ either account; this assignment leaves `before` empty.
 | @solana/kit | 8.3.0 |
 | @coral-xyz/anchor (TS client) | 0.32.1 |
 
-Tests run with `anchor test --validator legacy` (`solana-test-validator`), because Surfpool could
-not be installed in this environment. The same validator was used for the whole assignment.
+Tests run with `anchor test --validator legacy` (`solana-test-validator`) for the whole
+assignment. Result: **15 passing, 0 failing**: `codama` 4 (TODO 1-3 and the bonus),
+`fundraiser` 7, `time-window` 3, `time-window-bankrun` 1.
+
+One snag worth knowing: the `test` script in `Anchor.toml` passes `tests/**/*.ts` unquoted, and
+the shell `anchor test` uses has no `**`, so it expands to `tests/*/*.ts`, which only matches
+`tests/helpers/kit-adapter.ts`. The run then reports "0 passing". Changing the pattern locally
+to `tests/*.ts` runs all four suites. That edit is not committed, like the synced program ID.
